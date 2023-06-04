@@ -4,9 +4,9 @@ This is the backend server code to work with the Final Project Sales Site fronte
 
 ## Links
 
-### Frontend Repository:
+### Frontend Repository: [Frontend Repo](https://github.com/DavidMiles1925/fp-frontend).
 
-### Backend Repository:
+### Backend Repository: [Backend Repo](https://github.com/DavidMiles1925/fp-backend).
 
 #### ..................................................
 
