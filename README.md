@@ -1,4 +1,61 @@
+# 1 Project Info: Sales Site Server
+
+This is the backend server code to work with the Final Project Sales Site frontend code.
+
+## Links
+
+### Frontend Repository:
+
+### Backend Repository:
+
+#### ..................................................
+
 # 2 Documentation
+
+### Table of Contents
+
+#### 2.1 Server
+
+**2.1.1 Dependencies**  
+**2.1.2 Environement Variables**  
+**2.1.3 Features**
+
+#### 2.2 Models
+
+**2.2.1 Product Model**  
+**2.2.1 User Model**
+
+#### 2.3 Routes
+
+**2.3.1 Index Route**  
+**2.3.1 Product Route**  
+**2.3.3 User Route**
+
+#### 2.4 Controllers
+
+**2.4.1 Product Controllers**  
+-- 2.4.1.1 getusers  
+-- 2.4.1.2 createProduct  
+-- 2.4.1.3 deleteProduct
+
+**2.4.2 User Controllers**
+-- 2.4.2.1 getUsers
+-- 2.4.2.2 getCurrentUser
+-- 2.4.2.3 createUser
+-- 2.4.2.4 login
+-- 2.4.2.5 updateProfile
+-- 2.4.2.6 addToCart
+-- 2.4.2.7 removeFromCart
+-- 2.4.2.8 updateCartTotal
+
+#### 2.5 Middlewares
+
+**2.5.1 Authorization**
+**2.5.2 Error Handling**
+**2.5.3 Logging**
+**2.5.4 Validation**
+
+#### ..................................................
 
 ## 2.1 Server (app.js)
 
