@@ -1,13 +1,18 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
+const helmet = require("helmet");
+require("dotenv").config();
 
 const { PORT = 3001 } = process.env;
+const { SERVER_ADDRESS = "server_address" } = process.env;
 
 const app = express();
 
 const { errors } = require("celebrate");
 const { requestLogger, errorLogger } = require("./middlewares/logger");
+
+const { limiter } = require("./middlewares/limiter");
 
 app.get("/crash-test", () => {
   setTimeout(() => {
@@ -20,10 +25,12 @@ const routes = require("./routes");
 const errorHandler = require("./middlewares/error-handler");
 
 mongoose
-  .connect("mongodb://127.0.0.1:27017/bmd_db")
-  .then(console.log("DB connected"));
+  .connect(`mongodb://${SERVER_ADDRESS}`)
+  .then(console.log(`DB connected at ${SERVER_ADDRESS}`));
 
 app.use(cors());
+app.use(helmet());
+app.use(limiter);
 
 app.use(express.json());
 

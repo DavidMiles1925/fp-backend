@@ -1,5 +1,4 @@
 const { Joi, celebrate } = require("celebrate");
-const validator = require("validator");
 
 const validatePhone = (value, helpers) => {
   const regex = /^[0-9]{10,11}$/;
