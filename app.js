@@ -45,5 +45,6 @@ app.use(errorHandler);
 if (process.env.NODE_ENV !== "test") {
   app.listen(PORT, () => {
     console.log(`App listening on port ${PORT}`);
+    console.log(process.env.NODE_ENV);
   });
 }
