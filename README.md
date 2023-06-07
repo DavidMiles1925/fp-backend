@@ -1,65 +1,128 @@
-# Server app.js
+# 1 Project Info: Sales Site Server
+
+This is the backend server code to work with the Final Project Sales Site frontend code.
+
+## Links
+
+Website: [Website](https://www.dmwtwr.crabdance.com/)  
+API: [API](https://api.dmwtwr.crabdance.com/)
+
+Frontend Repository: [Frontend Repo](https://github.com/DavidMiles1925/fp-frontend).  
+Backend Repository: [Backend Repo](https://github.com/DavidMiles1925/fp-backend).
+
+#### ..................................................
+
+# 2 Documentation
+
+### Table of Contents
+
+#### 2.1 Server
+
+**2.1.1 Dependencies**  
+**2.1.2 Environement Variables**  
+**2.1.3 Features**
+
+#### 2.2 Models
+
+**2.2.1 Product Model**  
+**2.2.1 User Model**
+
+#### 2.3 Routes
+
+**2.3.1 Index Route**  
+**2.3.1 Product Route**  
+**2.3.3 User Route**
+
+#### 2.4 Controllers
+
+**2.4.1 Product Controllers**  
+-- 2.4.1.1 getusers  
+-- 2.4.1.2 createProduct  
+-- 2.4.1.3 deleteProduct
+
+**2.4.2 User Controllers**
+-- 2.4.2.1 getUsers
+-- 2.4.2.2 getCurrentUser
+-- 2.4.2.3 createUser
+-- 2.4.2.4 login
+-- 2.4.2.5 updateProfile
+-- 2.4.2.6 addToCart
+-- 2.4.2.7 removeFromCart
+-- 2.4.2.8 updateCartTotal
+
+#### 2.5 Middlewares
+
+**2.5.1 Authorization**
+**2.5.2 Error Handling**
+**2.5.3 Logging**
+**2.5.4 Validation**
+
+#### ..................................................
+
+## 2.1 Server (app.js)
 
 This code sets up an Express application, establishes a connection with a MongoDB database, defines routes, applies middleware for error logging and handling, and starts the server. It provides a basic structure for building a web application with error handling capabilities.
 
-## Dependencies
+### 2.1.1 Dependencies
 
 - **express**: Express is a popular web framework for Node.js that simplifies the process of building web applications.
 - **mongoose**: Mongoose is an Object Data Modeling (ODM) library for MongoDB and provides a straightforward way to interact with the database.
 - **cors**: Cors is a middleware that allows Cross-Origin Resource Sharing (CORS) in the Express application.
 
-## Environment Variables
+### 2.1.2 Environment Variables
 
 - **PORT**: The port on which the Express application will listen. Default value is set to 3001 if not specified in the environment.
 
-## Creating the Express Application
+### 2.1.3 Features
+
+#### Creating the Express Application
 
 - An instance of the Express application is created using `express()`, which initializes a new Express application.
 - The `app` variable will be used to define routes, middleware, and start the server.
 
-## Error Logging
+#### Error Logging
 
 - The application includes middleware for logging errors using the `errorLogger` middleware defined in "./middlewares/logger.js".
 - The `errorLogger` middleware logs errors generated during the request processing.
 
-## Crash Test Route
+#### Crash Test Route
 
 - The `/crash-test` route is used for testing purposes. When accessed, it intentionally throws an error after a delay of 0 milliseconds, causing the server to crash.
 - This route is helpful for testing the error handling capabilities of the application.
 
-## Database Connection
+#### Database Connection
 
 - The application connects to a MongoDB database using the `mongoose.connect()` method. The connection string "mongodb://127.0.0.1:27017/bmd_db" specifies the database URL.
 - The connection is established, and a success message is logged to the console.
 
-## Middleware
+#### Middleware
 
 - The `cors` middleware is applied using `app.use(cors())`, allowing Cross-Origin Resource Sharing in the application.
 - The `express.json()` middleware is used to parse JSON data sent in the request body.
 
-## Request Logging
+#### Request Logging
 
 - The application includes middleware for logging incoming requests using the `requestLogger` middleware defined in "./middlewares/logger.js".
 - The `requestLogger` middleware logs information about each incoming request.
 
-## Routes
+#### Routes
 
 - The application includes routes defined in the "./routes" module. These routes handle various API endpoints and define the behavior of the server for different HTTP requests.
 
-## Error Handling
+#### Error Handling
 
 - The application includes error handling middleware defined in the "./middlewares/error-handler.js" module.
 - The `errors()` middleware from the "celebrate" library is used to handle validation errors thrown by the celebrate library.
 - The `errorHandler` middleware is used to handle other types of errors and return appropriate error responses.
 
-## Starting the Server
+#### Starting the Server
 
 - The server is started by calling the `app.listen()` method. It listens on the specified `PORT` for incoming connections.
 - The server only starts if the `NODE_ENV` environment variable is not set to "test". This prevents the server from starting during testing.
 
-## Modals
+## 2.2 Models
 
-### Product (product.js)
+### 2.2.1 Product Model (product.js)
 
 This code defines a Mongoose schema and model for the "product" collection. The schema specifies the structure and validation rules for the product documents stored in the database. It ensures that all required fields are present and provides a default value for the `createdAt` field. The model allows performing CRUD operations on the "product" collection, such as creating, reading, updating, and deleting products. It leverages the features provided by Mongoose to simplify database interactions and enforce data consistency.
 
@@ -87,7 +150,7 @@ This code defines a Mongoose schema and model for the "product" collection. The 
 - The product schema is compiled into a Mongoose model using `mongoose.model("product", productSchema)`.
 - The model is exported to be used in other modules.
 
-### User Model (user.js)
+### 2.2.2 User Model (user.js)
 
 This code defines a Mongoose schema and model for the "user" collection. The schema specifies the structure and validation rules for the user documents stored in the database. It ensures that the email is unique, validates the email format, and hashes the password before storing it. The model provides functions for finding a user by their credentials and performs password comparison using bcryptjs. It enables CRUD operations on the "user" collection and encapsulates the logic related to user authentication and authorization.
 
@@ -130,9 +193,9 @@ This code defines a Mongoose schema and model for the "user" collection. The sch
 - The user schema is compiled into a Mongoose model using `mongoose.model("user", userSchema)`.
 - The model is exported to be used in other modules.
 
-## Routes
+## 2.3 Routes
 
-### index.js
+### 2.3.1 Index Route (index.js)
 
 This code sets up a router in Express and defines various routes related to user authentication, user management, and product management. It applies middleware for user authentication, input validation, and error handling. The code provides a structure for organizing the routes and middleware in a modular and scalable way.
 
@@ -170,7 +233,7 @@ This code sets up a router in Express and defines various routes related to user
 
 - The router object is exported to be used in other modules.
 
-### Product Router (products.js)
+### 2.3.2 Product Route (products.js)
 
 This code sets up a router in Express specifically for product-related routes. It defines routes for retrieving all products, creating a new product, and deleting a specific product. The routes are protected with authentication middleware and apply validation middleware to ensure the correctness of the input data. The code follows a modular approach by separating the route handling logic into separate controllers and middleware functions, making it easier to maintain and extend the codebase.
 
@@ -196,7 +259,7 @@ This code sets up a router in Express specifically for product-related routes. I
 
 - The router object is exported to be used in other modules.
 
-### User Router (users.js)
+### 2.3.3 User Router (users.js)
 
 This code sets up a router in Express specifically for user-related routes. It defines routes for retrieving all users, retrieving the current user's information, updating the current user's profile, adding/removing products from the user's cart, and updating the cart total. The routes are protected with authentication middleware and apply validation middleware to ensure the correctness of the input data. The code follows a modular approach by separating the route handling logic into separate controllers and middleware functions, making it easier to maintain and extend the codebase.
 
@@ -229,20 +292,20 @@ This code sets up a router in Express specifically for user-related routes. It d
 
 - The router object is exported to be used in other modules.
 
-## Controllers
+## 2.4 Controllers
 
-### Product Controllers (products.js)
+### 2.4.1 Product Controllers (products.js)
 
 This code defines the controller functions for managing products. The `getProducts` function retrieves all products, `createProduct` function creates a new product, and `deleteProduct` function deletes a product. These functions interact with the `Product` model to perform database operations. They handle different scenarios such as validation errors, not found errors, and forbidden access errors, and pass the errors to the error handling middleware using the `next` function.
 
-#### getProducts
+#### 2.4.1.1 getProducts
 
 - This function is used to retrieve all products from the database.
 - It uses the `Product` model to find all products by calling `Product.find({})`.
 - If the retrieval is successful, it sends the products as the response with a status code of `USER_OK` (200).
 - If an error occurs, it calls the `next` function with the error to pass it to the error handling middleware.
 
-#### createProduct
+#### 2.4.1.2 createProduct
 
 - This function is used to create a new product.
 - It extracts the necessary fields (`name`, `price`, `description`, `category`) and optional fields (`subcat1`, `subcat2`, `image`) from the request body.
@@ -252,7 +315,7 @@ This code defines the controller functions for managing products. The `getProduc
 - If a validation error occurs, it calls the `next` function with a `BadRequestError` to handle the bad request.
 - If any other error occurs, it calls the `next` function with the error to pass it to the error handling middleware.
 
-#### deleteProduct
+#### 2.4.1.3 deleteProduct
 
 - This function is used to delete a product by its ID.
 - It first finds the product by its ID using `Product.findById(req.params.ProductId)`.
@@ -264,18 +327,18 @@ This code defines the controller functions for managing products. The `getProduc
 - If the product is not found during the deletion process, it calls the `next` function with a `NotFoundError` to handle the not found error.
 - If any other error occurs, it calls the `next` function with the error to pass it to the error handling middleware.
 
-### User Controllers (users.js)
+### 2.4.2 User Controllers (users.js)
 
 This code defines the controller functions for managing users. The `getUsers` function retrieves all users, `getCurrentUser` function retrieves the current user's information, `createUser` function creates a new user, `login` function handles user login, `updateProfile` function updates the user's profile information, `addToCart` function adds a product to the user's cart, `removeFromCart` function removes a product from the user's cart, and `updateCartTotal` function updates the user's cart total. These functions interact with the `User` model to perform database operations. They handle different scenarios such as validation errors, not found errors, unauthorized access errors, and conflicts, and pass the errors to the error handling middleware using the `next` function.
 
-#### getUsers
+#### 2.4.2.1 getUsers
 
 - This function is used to retrieve all users from the database.
 - It uses the `User` model to find all users by calling `User.find({})`.
 - If the retrieval is successful, it sends the users as the response with a status code of `USER_OK` (200).
 - If an error occurs, it calls the `next` function with the error to pass it to the error handling middleware.
 
-#### getCurrentUser
+#### 2.4.2.2 getCurrentUser
 
 - This function is used to retrieve the current user's information.
 - It finds the user by their ID using `User.findById(req.user._id)`.
@@ -283,7 +346,7 @@ This code defines the controller functions for managing users. The `getUsers` fu
 - If the user is found, it sends the user's information as the response with a status code of `USER_OK` (200).
 - If an error occurs, it calls the `next` function with the error to pass it to the error handling middleware.
 
-#### createUser
+#### 2.4.2.3 createUser
 
 - This function is used to create a new user.
 - It extracts the necessary fields (`name`, `phone`, `email`) and optional fields (`address`, `cartTotal`) from the request body.
@@ -293,7 +356,7 @@ This code defines the controller functions for managing users. The `getUsers` fu
 - If a validation error occurs or if the username is already in use, it calls the `next` function with a `ConflictError` to handle the conflict.
 - If any other error occurs, it calls the `next` function with the error to pass it to the error handling middleware.
 
-#### login
+#### 2.4.2.4 login
 
 - This function is used to handle user login.
 - It extracts the `email` and `password` from the request body.
@@ -301,7 +364,7 @@ This code defines the controller functions for managing users. The `getUsers` fu
 - If the user is found and the password is correct, it generates a JSON Web Token (JWT) using the `jsonwebtoken` library and sends it as the response with a status code of `USER_OK` (200).
 - If the email or password is invalid, it calls the `next` function with a `UnauthorizedError` to handle the unauthorized access error.
 
-#### updateProfile
+#### 2.4.2.5 updateProfile
 
 - This function is used to update the current user's profile information.
 - It extracts the `name`, `phone`, and `address` from the request body.
@@ -310,7 +373,7 @@ This code defines the controller functions for managing users. The `getUsers` fu
 - If the user is not found, it returns a `NotFoundError` to handle the not found error.
 - If any other error occurs, it calls the `next` function with the error to pass it to the error handling middleware.
 
-#### addToCart
+#### 2.4.2.6 addToCart
 
 - This function is used to add a product to the user's cart.
 - It extracts the product ID (`_id`) and the cart total from the request body.
@@ -322,7 +385,7 @@ update is successful, it sends the updated user as the response with a status co
 - If the user is not found, it returns a `NotFoundError` to handle the not found error.
 - If any other error occurs, it calls the `next` function with the error to pass it to the error handling middleware.
 
-#### removeFromCart
+#### 2.4.2.7 removeFromCart
 
 - This function is used to remove a product from the user's cart.
 - It extracts the product ID (`_id`) and the cart total from the request body.
@@ -331,7 +394,7 @@ update is successful, it sends the updated user as the response with a status co
 - If the user is not found, it returns a `NotFoundError` to handle the not found error.
 - If any other error occurs, it calls the `next` function with the error to pass it to the error handling middleware.
 
-#### updateCartTotal
+#### 2.4.2.8 updateCartTotal
 
 - This function is used to update the user's cart total.
 - It extracts the new cart total from the request body.
@@ -340,9 +403,9 @@ update is successful, it sends the updated user as the response with a status co
 - If the user is not found, it returns a `NotFoundError` to handle the not found error.
 - If any other error occurs, it calls the `next` function with the error to pass it to the error handling middleware.
 
-## MiddleWares
+## 2.5 MiddleWares
 
-### Authorization (auth.js)
+### 2.5.1 Authorization (auth.js)
 
 This code defines an authentication middleware called `auth`. The purpose of this middleware is to verify the authenticity of incoming requests by checking the presence and validity of a JSON Web Token (JWT) in the request headers.
 
@@ -378,9 +441,9 @@ module.exports = router;
 
 In this example, the `/protected` route is only accessible to authenticated users. The `auth` middleware is applied to this route by passing it as a second argument before the route handler. If the authentication fails, the middleware will automatically return a `UnauthorizedError` response. If the authentication succeeds, the route handler function will be executed.
 
-### Error Handling
+### 2.5.2 Error Handling
 
-#### Error Handler (error-handler.js)
+#### 2.5.2.1 Error Handler (error-handler.js)
 
 This code defines an error handler middleware function called `errorHandler`. This middleware is responsible for handling errors that occur during the processing of a request and sending an appropriate response back to the client.
 
@@ -411,7 +474,7 @@ app.use(errorHandler);
 
 By adding the `errorHandler` middleware to the application, it becomes the last middleware in the stack and will handle any unhandled errors by sending a response with the appropriate status code and error message.
 
-#### Custom Errors (badRequestError.js, conflictError.js, forbiddenError.js, notFoundError.js, unauthorizaedError.js)
+#### 2.5.2.2 Custom Errors (badRequestError.js, conflictError.js, forbiddenError.js, notFoundError.js, unauthorizaedError.js)
 
 **All custom errors follow the same format as the error described below:**
 
@@ -446,7 +509,7 @@ function createProduct(req, res, next) {
 
 In this example, if the `subcat1` field is missing in the request body, a `BadRequestError` is thrown with the error message "Subcategory 1 is required". This error will be caught by the error-handling middleware and a response with a `400 Bad Request` status code will be sent back to the client.
 
-### Logging (logger.js)
+### 2.5.3 Logging (logger.js)
 
 This code sets up logging middleware using the `winston` and `express-winston` packages. It defines two loggers: `requestLogger` and `errorLogger`.
 
@@ -482,7 +545,7 @@ By adding the `errorLogger` middleware, any errors that occur during request pro
 
 Make sure to configure the appropriate transport options and adjust the logging behavior to suit your specific needs.
 
-### Validation (validator.js)
+### 2.5.4 Validation (validator.js)
 
 These middleware functions can be used in your routes to validate incoming request data. If the data doesn't meet the defined constraints, `celebrate` will automatically handle the error and send an appropriate response.
 
